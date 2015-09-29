@@ -1,5 +1,5 @@
 #!/bin/bash
-#this is my welcome script to properly address welcome
+#this is my welcome script to properly address me when ran
 
 mytitle="Dank Lord"
 myname="Riley"
