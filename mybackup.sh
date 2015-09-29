@@ -1,4 +1,6 @@
 #!/bin/bash
 #A script to backup the mydata folder
 
-tar -cvpf /home/megaeverything/mydata-backup.tar /home/megaeverything/mydata
+cd ~/mydata
+mkdir ~/mydata-backup
+tar cf - .| (cd ~/mydata-backup; tar xf -)
