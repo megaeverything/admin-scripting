@@ -6,7 +6,7 @@ myNumber=$(($RANDOM % 10 + 1))
 guess=0
 
 while [ $guess -ne $myNumber ]; do
-    read -p "Pick a number from to 10:" guess
+    read -p "Pick a number from 1 to 10:" guess
 done
 
 echo "You got it! The number was $myNumber"
