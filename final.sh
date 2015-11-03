@@ -21,7 +21,7 @@
 echo "Checking for root access..."
 if [ `id -u` != "0" ]; then
 	echo "You need to be root for parts of this script to run properly."
-	echo "Please try using sudo and restarting this script"
+	echo "Please try using sudo and restarting this script."
 	exit 1
 fi
 echo "SUCCESS!"
@@ -29,8 +29,9 @@ echo ""
 
 echo "Checking if Bind is installed..."
 if [[ `dpkg-query -W -f='${Status} ${Version}\n' bind9` != install* ]]; then
-    echo "You do not have bind installed"
+    echo "You do not have bind installed."
     echo "Installing bind9..."
+    sudo apt-get install bind9 bind9utils
 fi
 echo "SUCCESS!"
 echo ""
