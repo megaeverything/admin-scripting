@@ -35,3 +35,5 @@ if [[ `dpkg-query -W -f='${Status} ${Version}\n' bind9` != install* ]]; then
 fi
 echo "SUCCESS!"
 echo ""
+
+read -p "Please enter in a domain name to use: " domain
