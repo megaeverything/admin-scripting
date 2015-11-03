@@ -25,8 +25,12 @@ if [ `id -u` != "0" ]; then
 	exit 1
 fi
 echo "SUCCESS!"
+echo ""
 
 echo "Checking if Bind is installed..."
-if [[ `dpkg-query -W -f='${Status} ${Version}\n' bind9` != *install* ]]; then
-echo "You do not have bind installed"
+if [[ `dpkg-query -W -f='${Status} ${Version}\n' bind9` != install* ]]; then
+    echo "You do not have bind installed"
+    echo "Installing bind9..."
 fi
+echo "SUCCESS!"
+echo ""
