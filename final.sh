@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#By: Riley Fuligni
+#For: COMP2101
+
+
 # This script is for the COMP2101 course at georgian college.
 #It is supposed to be able to:
 
@@ -80,8 +84,44 @@ echo -e "1\tIN\tPTR\tmail.$domain." >> db.192.168.59
 echo "Reverse lookup files created."
 
 #add zones to the named.conf.local file
+echo "Adding new zones to the named.conf.local file..."
 echo -e "zone \"$domain\" {\n\ttype master;\n\tfile \"/etc/bind/db.$domain\";\n};" >> named.conf.local
 echo "" >> named.conf.local
 echo -e "zone \"47.168.192.in-addr.arpa\" {\n\ttype master;\n\tfile \"/etc/bind/db.192.168.47\";\n};" >> named.conf.local
 echo "" >> named.conf.local
 echo -e "zone \"59.168.192.in-addr.arpa\" {\n\ttype master;\n\tfile \"/etc/bind/db.192.168.59\";\n};" >> named.conf.local
+echo "Zones added."
+echo ""
+
+#reload the bind server
+echo "Reloading the bind server..."
+rndc reload
+echo ""
+
+#check the new zones to verify they are working correctly
+echo "Checking if ns1 is configured correctly..."
+if [[ "nslookup ns1.$domain localhost" = *"server can't find ns1.$domain"* ]]; then
+    echo "Cannot find ns1, please re-run the script"
+    exit 1
+fi
+echo "SUCCESS!"
+echo ""
+
+echo "Checking if www is configured correctly..."
+if [[ "nslookup www.$domain localhost" = *"server can't find www.$domain"* ]]; then
+    echo "Cannot find www, please re-run the script"
+    exit 1
+fi
+echo "SUCCESS!"
+echo ""
+
+echo "Checking if mail is configured correctly..."
+if [[ "nslookup mail.$domain localhost" = *"server can't find mail.$domain"* ]]; then
+    echo "Cannot find mail, please re-run the script"
+    exit 1
+fi
+echo "SUCCESS!"
+echo ""
+
+echo "All zones were created successfully and verified to be working. Thanks for using this script."
+exit 0
